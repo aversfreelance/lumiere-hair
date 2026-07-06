@@ -409,6 +409,23 @@
 .style-site .st-hero-bg-video {
   position: absolute;
   inset: 0;
+  pointer-events: none;
+}
+
+.hero-video-bg {
+  pointer-events: none;
+}
+
+.hero-video-bg::-webkit-media-controls,
+.hero-video-bg::-webkit-media-controls-enclosure,
+.hero-video-bg::-webkit-media-controls-panel,
+.hero-video-bg::-webkit-media-controls-play-button,
+.hero-video-bg::-webkit-media-controls-start-playback-button,
+.hero-video-bg::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .style-site .st-hero-wave-bottom {

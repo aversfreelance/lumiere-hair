@@ -33,12 +33,18 @@ export function HeroVideoOnce({ src, className = "", poster }: HeroVideoOnceProp
   return (
     <video
       ref={videoRef}
-      className={className}
+      className={`hero-video-bg ${className}`.trim()}
       src={src}
       poster={poster}
       muted
+      autoPlay
       playsInline
       preload="auto"
+      controls={false}
+      controlsList="nodownload nofullscreen noremoteplayback"
+      disablePictureInPicture
+      disableRemotePlayback
+      tabIndex={-1}
       aria-hidden
     />
   );
