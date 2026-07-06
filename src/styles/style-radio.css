@@ -435,7 +435,7 @@
 .style-site .st-hero-logo-link {
   position: absolute;
   left: 16px;
-  top: 158px;
+  top: 52px;
   z-index: 7;
   line-height: 1;
   transition: transform 0.25s ease;
@@ -476,7 +476,7 @@
 @media (min-width: 768px) {
   .style-site .st-hero-logo-link {
     left: 24px;
-    top: 164px;
+    top: 58px;
   }
 
   .style-site .st-text-logo {
