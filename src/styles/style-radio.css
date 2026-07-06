@@ -361,10 +361,10 @@
   position: relative;
   width: 100%;
   max-width: none;
-  padding-top: 110px;
+  padding-top: 188px;
   padding-bottom: 0;
   margin-bottom: 0;
-  min-height: clamp(680px, 85vh, 920px);
+  min-height: clamp(760px, 91vh, 1000px);
   overflow: hidden;
 }
 
@@ -401,9 +401,14 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 28%;
+  object-position: center 38%;
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 86%, transparent 100%);
   mask-image: linear-gradient(to bottom, #000 0%, #000 86%, transparent 100%);
+}
+
+.style-site .st-hero-bg-video {
+  position: absolute;
+  inset: 0;
 }
 
 .style-site .st-hero-wave-bottom {
@@ -413,7 +418,7 @@
 .style-site .st-hero-logo-link {
   position: absolute;
   left: 16px;
-  top: 82px;
+  top: 158px;
   z-index: 7;
   line-height: 1;
   transition: transform 0.25s ease;
@@ -454,7 +459,7 @@
 @media (min-width: 768px) {
   .style-site .st-hero-logo-link {
     left: 24px;
-    top: 88px;
+    top: 164px;
   }
 
   .style-site .st-text-logo {
@@ -499,15 +504,15 @@
   justify-content: flex-end;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 300px 20px 16px 100px;
+  padding: 372px 20px 16px 100px;
   position: relative;
-  min-height: 560px;
+  min-height: 640px;
 }
 
 @media (min-width: 900px) {
   .style-site .st-hero-panel-inner {
-    min-height: 660px;
-    padding-top: 380px;
+    min-height: 740px;
+    padding-top: 452px;
     padding-bottom: 24px;
   }
 }
@@ -521,13 +526,13 @@
   z-index: 6;
   width: min(100%, 560px);
   margin-left: auto;
-  margin-top: 160px;
+  margin-top: 224px;
   transform: translateX(32px);
 }
 
 @media (min-width: 900px) {
   .style-site .st-hero-graphic {
-    margin-top: 200px;
+    margin-top: 264px;
     transform: translateX(48px);
   }
 }

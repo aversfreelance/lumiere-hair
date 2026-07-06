@@ -4,6 +4,10 @@ import { useEffect, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { StyleTextLogo } from "@/components/style/StyleTextLogo";
+import { HeroVideoOnce } from "@/components/ui/HeroVideoOnce";
+
+const HERO_VIDEO = "/videos/fej-animacio.mp4";
+const HERO_POSTER = "/images/style/hero-bg.png";
 
 const heroBands = [
   {
@@ -50,13 +54,10 @@ export function StyleHeroBand() {
   return (
     <section className="st-hero-band">
       <div className="st-hero-bg" aria-hidden="true">
-        <Image
-          src="/images/style/hero-bg.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="st-hero-bg-img"
+        <HeroVideoOnce
+          src={HERO_VIDEO}
+          poster={HERO_POSTER}
+          className="st-hero-bg-img st-hero-bg-video"
         />
       </div>
 
