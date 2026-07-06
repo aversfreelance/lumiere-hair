@@ -1395,6 +1395,25 @@
   background: var(--ss-orange-hover);
 }
 
+.sunshine-site .ss-schedule-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.sunshine-site .ss-schedule-nav:disabled:hover {
+  background: var(--ss-orange);
+}
+
+.sunshine-site .ss-schedule-closed {
+  margin: 20px 0 0;
+  padding: 18px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--ss-text-muted, #666);
+  border: 2px dashed var(--ss-orange, #fbaa31);
+  border-radius: 12px;
+}
+
 .sunshine-site .ss-schedule-slots {
   list-style: none;
   margin: 0;

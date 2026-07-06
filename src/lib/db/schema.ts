@@ -96,6 +96,13 @@ export const galleryImages = pgTable("gallery_images", {
   isActive: boolean("is_active").notNull().default(true),
 });
 
+export const openingHours = pgTable("opening_hours", {
+  dayOfWeek: integer("day_of_week").primaryKey(),
+  isOpen: boolean("is_open").notNull().default(true),
+  startTime: time("start_time").notNull(),
+  endTime: time("end_time").notNull(),
+});
+
 export const stylistsRelations = relations(stylists, ({ many }) => ({
   stylistServices: many(stylistServices),
   workingHours: many(workingHours),

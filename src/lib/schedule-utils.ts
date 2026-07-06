@@ -1,4 +1,11 @@
-import { addDays, format, isSameDay, startOfToday } from "date-fns";
+import { addDays, differenceInCalendarDays, format, isSameDay, startOfToday } from "date-fns";
+import {
+  FALLBACK_SCHEDULE_DAY_CONFIG,
+  type ScheduleDayConfig,
+} from "@/lib/opening-hours";
+
+/** Number of calendar days bookable from today (today = day 0). */
+export const SCHEDULE_BOOKING_DAYS = 14;
 import { FALLBACK_SERVICES, sortServicesByPrice } from "@/lib/services-data";
 
 export type ScheduleServiceOption = {
@@ -11,15 +18,8 @@ export const SCHEDULE_FALLBACK_SERVICES: ScheduleServiceOption[] = sortServicesB
   FALLBACK_SERVICES.map(({ id, name, priceCents }) => ({ id, name, priceCents })),
 );
 
-export const SCHEDULE_DAY_CONFIG = [
-  { name: "Monday", startHour: 9, endHour: 20 },
-  { name: "Tuesday", startHour: 9, endHour: 20 },
-  { name: "Wednesday", startHour: 9, endHour: 20 },
-  { name: "Thursday", startHour: 9, endHour: 20 },
-  { name: "Friday", startHour: 9, endHour: 20 },
-  { name: "Saturday", startHour: 9, endHour: 20 },
-  { name: "Sunday", startHour: 10, endHour: 20 },
-] as const;
+/** @deprecated Use useScheduleDayConfig() for live opening hours */
+export const SCHEDULE_DAY_CONFIG = FALLBACK_SCHEDULE_DAY_CONFIG;
 
 export function generateHourlySlots(startHour: number, endHour: number) {
   const slots: string[] = [];
@@ -35,12 +35,36 @@ export function formatHourRange(start: string) {
   return `${start} – ${end}`;
 }
 
+export function getDateForScheduleIndex(index: number) {
+  const clamped = Math.min(Math.max(index, 0), SCHEDULE_BOOKING_DAYS - 1);
+  return addDays(startOfToday(), clamped);
+}
+
+/** @deprecated Use getDateForScheduleIndex */
 export function getDateForDayIndex(dayIndex: number) {
-  const jsDay = dayIndex === 6 ? 0 : dayIndex + 1;
-  const today = startOfToday();
-  let diff = jsDay - today.getDay();
-  if (diff < 0) diff += 7;
-  return addDays(today, diff);
+  return getDateForScheduleIndex(dayIndex);
+}
+
+export function getDayConfigForDate(
+  weeklyConfig: ScheduleDayConfig[],
+  date: Date
+): ScheduleDayConfig {
+  const dayOfWeek = date.getDay();
+  return (
+    weeklyConfig.find((day) => day.dayOfWeek === dayOfWeek) ??
+    FALLBACK_SCHEDULE_DAY_CONFIG.find((day) => day.dayOfWeek === dayOfWeek) ??
+    weeklyConfig[0]
+  );
+}
+
+export function isBookingDateInRange(date: string | Date) {
+  const bookingDay = typeof date === "string" ? new Date(`${date}T12:00:00`) : date;
+  const daysAhead = differenceInCalendarDays(bookingDay, startOfToday());
+  return daysAhead >= 0 && daysAhead < SCHEDULE_BOOKING_DAYS;
+}
+
+export function getMaxBookingDate() {
+  return addDays(startOfToday(), SCHEDULE_BOOKING_DAYS - 1);
 }
 
 export function isSlotPast(bookingDate: Date, time: string) {
@@ -53,13 +77,17 @@ export function isSlotPast(bookingDate: Date, time: string) {
   return Date.now() >= slotStart.getTime();
 }
 
-export function scheduleSlotKey(dayIndex: number, time: string) {
-  return `${dayIndex}-${time}`;
+export function scheduleSlotKey(date: Date, time: string) {
+  return `${formatBookingDate(date)}-${time}`;
 }
 
+export function getDefaultScheduleIndex() {
+  return 0;
+}
+
+/** @deprecated Use getDefaultScheduleIndex */
 export function getDefaultDayIndex() {
-  const today = new Date().getDay();
-  return today === 0 ? 6 : today - 1;
+  return getDefaultScheduleIndex();
 }
 
 export function formatBookingDate(date: Date) {

@@ -1,25 +1,30 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { isSameDay, startOfToday } from "date-fns";
 import {
-  SCHEDULE_DAY_CONFIG,
-  formatBookingDate,
-  formatDayDateLabel,
   formatHourRange,
-  generateHourlySlots,
-  getDateForDayIndex,
-  getDefaultDayIndex,
   isSlotPast,
   scheduleSlotKey,
   SCHEDULE_FALLBACK_SERVICES,
   type ScheduleServiceOption,
 } from "@/lib/schedule-utils";
 import { sortServicesByPrice } from "@/lib/services-data";
+import { useScheduleDayState } from "@/components/schedule/useScheduleDayState";
 
 export function YoungScheduleSection() {
-  const [index, setIndex] = useState(getDefaultDayIndex);
+  const {
+    day,
+    slots,
+    bookingDate,
+    bookingDateObj,
+    dayDateLabel,
+    isSelectedToday,
+    canGoPrevious,
+    canGoNext,
+    goToPreviousDay,
+    goToNextDay,
+  } = useScheduleDayState();
   const [services, setServices] = useState<ScheduleServiceOption[]>(SCHEDULE_FALLBACK_SERVICES);
   const [selections, setSelections] = useState<Record<string, string>>({});
 
@@ -34,20 +39,10 @@ export function YoungScheduleSection() {
       .catch(() => {});
   }, []);
 
-  const day = SCHEDULE_DAY_CONFIG[index];
-  const slots = useMemo(
-    () => generateHourlySlots(day.startHour, day.endHour),
-    [day.startHour, day.endHour],
-  );
-  const bookingDateObj = getDateForDayIndex(index);
-  const bookingDate = formatBookingDate(bookingDateObj);
-  const dayDateLabel = formatDayDateLabel(bookingDateObj);
-  const isSelectedToday = isSameDay(bookingDateObj, startOfToday());
-
   function handleServiceChange(time: string, serviceId: string) {
     setSelections((prev) => ({
       ...prev,
-      [scheduleSlotKey(index, time)]: serviceId,
+      [scheduleSlotKey(bookingDateObj, time)]: serviceId,
     }));
   }
 
@@ -65,7 +60,8 @@ export function YoungScheduleSection() {
           <button
             type="button"
             className="ss-schedule-nav"
-            onClick={() => setIndex((i) => (i === 0 ? 6 : i - 1))}
+            onClick={goToPreviousDay}
+            disabled={!canGoPrevious}
             aria-label="Previous day"
           >
             ‹
@@ -78,54 +74,59 @@ export function YoungScheduleSection() {
           <button
             type="button"
             className="ss-schedule-nav"
-            onClick={() => setIndex((i) => (i === 6 ? 0 : i + 1))}
+            onClick={goToNextDay}
+            disabled={!canGoNext}
             aria-label="Next day"
           >
             ›
           </button>
         </div>
 
-        <ul className="ss-schedule-slots">
-          {slots.map((time) => {
-            const key = scheduleSlotKey(index, time);
-            const selectedServiceId = selections[key] || "";
-            const slotPast = isSelectedToday && isSlotPast(bookingDateObj, time);
+        {!day.isOpen ? (
+          <p className="ss-schedule-closed">Closed — please choose another day.</p>
+        ) : (
+          <ul className="ss-schedule-slots">
+            {slots.map((time) => {
+              const key = scheduleSlotKey(bookingDateObj, time);
+              const selectedServiceId = selections[key] || "";
+              const slotPast = isSelectedToday && isSlotPast(bookingDateObj, time);
 
-            return (
-              <li key={time}>
-                <div className={`ss-schedule-slot${slotPast ? " ss-schedule-slot-past" : ""}`}>
-                  <span className="ss-schedule-slot-range">{formatHourRange(time)}</span>
-                  <select
-                    className="ss-schedule-slot-select"
-                    value={selectedServiceId}
-                    onChange={(e) => handleServiceChange(time, e.target.value)}
-                    aria-label={`Select service for ${formatHourRange(time)}`}
-                    disabled={slotPast}
-                  >
-                    <option value="">Select service</option>
-                    {services.map((service) => (
-                      <option key={service.id} value={service.id}>
-                        {service.name}
-                      </option>
-                    ))}
-                  </select>
-                  {slotPast ? (
-                    <span className="ss-schedule-slot-book ss-schedule-slot-book-disabled">Past</span>
-                  ) : selectedServiceId ? (
-                    <Link
-                      href={`/booking?service=${selectedServiceId}&date=${bookingDate}&time=${time}`}
-                      className="ss-schedule-slot-book"
+              return (
+                <li key={time}>
+                  <div className={`ss-schedule-slot${slotPast ? " ss-schedule-slot-past" : ""}`}>
+                    <span className="ss-schedule-slot-range">{formatHourRange(time)}</span>
+                    <select
+                      className="ss-schedule-slot-select"
+                      value={selectedServiceId}
+                      onChange={(e) => handleServiceChange(time, e.target.value)}
+                      aria-label={`Select service for ${formatHourRange(time)}`}
+                      disabled={slotPast}
                     >
-                      Book
-                    </Link>
-                  ) : (
-                    <span className="ss-schedule-slot-book ss-schedule-slot-book-disabled">Book</span>
-                  )}
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+                      <option value="">Select service</option>
+                      {services.map((service) => (
+                        <option key={service.id} value={service.id}>
+                          {service.name}
+                        </option>
+                      ))}
+                    </select>
+                    {slotPast ? (
+                      <span className="ss-schedule-slot-book ss-schedule-slot-book-disabled">Past</span>
+                    ) : selectedServiceId ? (
+                      <Link
+                        href={`/booking?service=${selectedServiceId}&date=${bookingDate}&time=${time}`}
+                        className="ss-schedule-slot-book"
+                      >
+                        Book
+                      </Link>
+                    ) : (
+                      <span className="ss-schedule-slot-book ss-schedule-slot-book-disabled">Book</span>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </div>
     </section>
   );

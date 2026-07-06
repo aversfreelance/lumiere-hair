@@ -3,6 +3,7 @@ import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
 import * as schema from "../src/lib/db/schema";
 import { hashPassword } from "../src/lib/auth";
+import { FALLBACK_OPENING_HOURS } from "../src/lib/opening-hours";
 
 const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql, { schema });
@@ -12,6 +13,7 @@ async function seed() {
 
   await db.delete(schema.bookings);
   await db.delete(schema.workingHours);
+  await db.delete(schema.openingHours);
   await db.delete(schema.stylistServices);
   await db.delete(schema.galleryImages);
   await db.delete(schema.stylists);
@@ -26,6 +28,8 @@ async function seed() {
       name: "Salon Admin",
     })
     .returning();
+
+  await db.insert(schema.openingHours).values(FALLBACK_OPENING_HOURS);
 
   const insertedServices = await db
     .insert(schema.services)

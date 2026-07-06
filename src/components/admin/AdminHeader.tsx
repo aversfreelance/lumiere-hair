@@ -8,6 +8,7 @@ const nav = [
   { href: "/admin/stylists", label: "Stylists" },
   { href: "/admin/services", label: "Services" },
   { href: "/admin/gallery", label: "Gallery" },
+  { href: "/admin/hours", label: "Hours" },
 ];
 
 async function logoutAction() {

@@ -54,6 +54,26 @@
   background: color-mix(in srgb, var(--gold) 8%, transparent);
 }
 
+.el-schedule-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.el-schedule-nav:disabled:hover {
+  border-color: color-mix(in srgb, var(--gold) 35%, var(--border));
+  color: var(--gold-light);
+  background: transparent;
+}
+
+.el-schedule-closed {
+  margin: 24px 0 0;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--muted);
+  border: 1px dashed color-mix(in srgb, var(--border) 80%, transparent);
+}
+
 .el-schedule-slots {
   list-style: none;
   margin: 0;

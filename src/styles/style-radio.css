@@ -621,6 +621,10 @@
     gap: 40px;
     min-height: 660px;
   }
+
+  .style-site .st-schedule-slide-closed {
+    align-items: start;
+  }
 }
 
 .style-site .st-schedule-content {
@@ -693,6 +697,10 @@
 
   .style-site .st-schedule-content {
     align-self: end;
+  }
+
+  .style-site .st-schedule-content-closed {
+    align-self: start;
   }
 }
 
@@ -769,6 +777,16 @@
   letter-spacing: 0.08em;
   margin: 8px 0 0;
   font-weight: 600;
+}
+
+.style-site .st-schedule-closed {
+  margin: 16px 0 0;
+  padding: 16px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--st-muted, #888);
+  border: 2px dashed var(--st-accent, #e85d4c);
+  border-radius: 8px;
 }
 
 .style-site .st-schedule-slots {
@@ -883,6 +901,11 @@
   align-items: center;
   justify-content: center;
   line-height: 1;
+}
+
+.style-site .st-swiper-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 .style-site .st-schedule-wave {

@@ -2,10 +2,11 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { format, addDays, startOfToday } from "date-fns";
+import { format, startOfToday } from "date-fns";
 import { Button } from "@/components/ui/Button";
 import { Input, Select, Textarea, Label, FieldError } from "@/components/ui/Input";
 import { formatPrice } from "@/lib/booking-utils";
+import { getMaxBookingDate } from "@/lib/schedule-utils";
 
 type Service = {
   id: number;
@@ -41,7 +42,7 @@ export function BookingForm() {
   const [serviceId, setServiceId] = useState(preselectedService || "");
   const [stylistId, setStylistId] = useState(preselectedStylist || "");
   const [date, setDate] = useState(
-    preselectedDate || format(addDays(startOfToday(), 1), "yyyy-MM-dd")
+    preselectedDate || format(startOfToday(), "yyyy-MM-dd")
   );
   const [time, setTime] = useState(preselectedTime || "");
   const [clientName, setClientName] = useState("");
@@ -219,7 +220,8 @@ export function BookingForm() {
                   id="date"
                   type="date"
                   value={date}
-                  min={format(addDays(startOfToday(), 1), "yyyy-MM-dd")}
+                  min={format(startOfToday(), "yyyy-MM-dd")}
+                  max={format(getMaxBookingDate(), "yyyy-MM-dd")}
                   onChange={(e) => setDate(e.target.value)}
                 />
               </div>
