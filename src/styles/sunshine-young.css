@@ -561,6 +561,93 @@
   color: var(--ss-orange);
 }
 
+/* ── Home stylists row ── */
+.sunshine-site .ss-stylists-section {
+  margin: 30px auto;
+}
+
+.sunshine-site .ss-stylists-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sunshine-site .ss-stylists-view-all {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.2s;
+}
+
+.sunshine-site .ss-stylists-view-all:hover {
+  color: var(--ss-orange);
+}
+
+.sunshine-site .ss-stylists-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+
+.sunshine-site .ss-stylists-track::-webkit-scrollbar {
+  display: none;
+}
+
+.sunshine-site .ss-stylist-scroll-card {
+  flex: 0 0 150px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s;
+}
+
+.sunshine-site .ss-stylist-scroll-card:hover {
+  transform: translateY(-4px);
+}
+
+.sunshine-site .ss-stylist-scroll-photo {
+  aspect-ratio: 3 / 4;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  border: 2px solid rgba(251, 170, 49, 0.35);
+  background: #232128;
+}
+
+.sunshine-site .ss-stylist-scroll-photo img,
+.sunshine-site .ss-stylist-scroll-photo .image-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sunshine-site .ss-stylist-scroll-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ss-white);
+  text-align: center;
+}
+
+.sunshine-site .ss-stylist-scroll-role {
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ss-orange);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .sunshine-site .ss-stylist-scroll-card {
+    flex-basis: 170px;
+  }
+}
+
 /* ── Fresh news (white section) ── */
 .sunshine-site .ss-fresh-section {
   background: var(--ss-white);
@@ -1504,4 +1591,181 @@
     gap: 12px;
     text-align: left;
   }
+}
+
+/* ── Admin portal (always Young style) ── */
+.sunshine-site.admin-site {
+  min-height: 100vh;
+  background: var(--ss-gradient);
+  font-family: var(--font-open-sans), "Open Sans", sans-serif;
+  color: var(--ss-white);
+}
+
+.sunshine-site.admin-site a {
+  text-decoration: none;
+}
+
+.sunshine-site.admin-site .ss-admin-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: var(--ss-gradient);
+  border-bottom: 1px solid rgba(251, 170, 49, 0.15);
+}
+
+.sunshine-site.admin-site .ss-admin-header-inner {
+  max-width: 1230px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .sunshine-site.admin-site .ss-admin-header-inner {
+    padding: 17px 40px;
+  }
+}
+
+.sunshine-site.admin-site .ss-admin-nav {
+  display: none;
+  align-items: center;
+  gap: 24px;
+}
+
+@media (min-width: 992px) {
+  .sunshine-site.admin-site .ss-admin-nav {
+    display: flex;
+  }
+}
+
+.sunshine-site.admin-site .ss-admin-nav-link {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: color 0.2s;
+}
+
+.sunshine-site.admin-site .ss-admin-nav-link:hover {
+  color: var(--ss-orange);
+}
+
+.sunshine-site.admin-site .ss-admin-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.sunshine-site.admin-site .ss-admin-user {
+  display: none;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+@media (min-width: 640px) {
+  .sunshine-site.admin-site .ss-admin-user {
+    display: inline;
+  }
+}
+
+.sunshine-site.admin-site .ss-admin-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--ss-orange);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.sunshine-site.admin-site .ss-admin-link-btn:hover {
+  color: var(--ss-orange-hover);
+}
+
+.sunshine-site.admin-site .admin-main {
+  padding-top: 24px;
+  padding-bottom: 64px;
+}
+
+.sunshine-site.admin-site .admin-login-wrap {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.sunshine-site.admin-site .admin-login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 40px 32px;
+  background: rgba(35, 33, 40, 0.92);
+  border: 1px solid rgba(251, 170, 49, 0.2);
+  border-radius: 20px;
+}
+
+.sunshine-site.admin-site .admin-login-sun {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: var(--ss-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.sunshine-site.admin-site .gradient-gold {
+  background: var(--ss-orange);
+  color: #000;
+  border-radius: 15px;
+}
+
+.sunshine-site.admin-site .gradient-gold:hover {
+  opacity: 0.92;
+}
+
+.sunshine-site.admin-site .theme-btn-outline {
+  border-color: rgba(251, 170, 49, 0.5);
+  color: var(--ss-orange);
+  border-radius: 15px;
+}
+
+.sunshine-site.admin-site .theme-btn-outline:hover {
+  background: rgba(251, 170, 49, 0.1);
+}
+
+.sunshine-site.admin-site .bg-surface {
+  background: rgba(35, 33, 40, 0.85);
+}
+
+.sunshine-site.admin-site .divide-border > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgba(251, 170, 49, 0.12);
+}
+
+.sunshine-site.admin-site table thead {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.sunshine-site.admin-site table tbody tr {
+  background: rgba(35, 33, 40, 0.5);
+}
+
+.sunshine-site.admin-site table tbody tr:hover {
+  background: rgba(35, 33, 40, 0.75);
+}
+
+.sunshine-site.admin-site .admin-file-input::file-selector-button {
+  background: var(--ss-orange);
+  color: #000;
+  border-radius: 12px;
 }

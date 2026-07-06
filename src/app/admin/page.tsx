@@ -35,41 +35,42 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-6">
-      <div className="w-full max-w-md border border-border bg-surface-elevated p-10">
-        <div className="text-center">
-          <span className="font-serif text-2xl tracking-[0.2em]">LUMIÈRE</span>
-          <p className="mt-2 text-xs uppercase tracking-widest text-muted">Admin Portal</p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="mt-10 space-y-6">
-          <div>
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@lumiere-hair.com"
-              required
-            />
-          </div>
-          <div>
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <FieldError message={error} />
-          <Button type="submit" className="w-full" loading={loading}>
-            Sign In
-          </Button>
-        </form>
+    <div className="admin-login-card">
+      <div className="text-center">
+        <div className="admin-login-sun">☀</div>
+        <h1 className="ss-page-title mt-4">
+          Lumière <span>Admin</span>
+        </h1>
+        <p className="ss-news-lead mt-2">Sign in to manage bookings and services</p>
       </div>
+
+      <form onSubmit={handleSubmit} className="mt-10 space-y-6">
+        <div>
+          <Label htmlFor="email">Email</Label>
+          <Input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="admin@lumiere-hair.com"
+            required
+          />
+        </div>
+        <div>
+          <Label htmlFor="password">Password</Label>
+          <Input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <FieldError message={error} />
+        <Button type="submit" className="w-full" loading={loading}>
+          Sign In
+        </Button>
+      </form>
     </div>
   );
 }

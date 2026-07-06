@@ -4,7 +4,7 @@ import Link from "next/link";
 import { StyleStylistPortrait } from "@/components/style/StyleStylistPortrait";
 
 const hosts = [
-  { id: 1, name: "Isabelle Laurent", image: "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=400&q=80" },
+  { id: 1, name: "Isabella Chen", image: "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=600&q=80" },
   { id: 2, name: "Marcus Chen", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" },
   { id: 3, name: "Sophie Williams", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80" },
   { id: 4, name: "James Okonkwo", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" },

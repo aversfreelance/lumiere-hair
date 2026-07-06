@@ -75,43 +75,28 @@ async function ElegantStylistsPage() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="el-stylists-section">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid gap-12 md:grid-cols-2">
+          <div className="el-stylists-grid">
             {displayTeam.map((stylist) => (
-              <article
-                key={stylist.id}
-                className="stylist-card group overflow-hidden border border-border bg-surface-elevated transition-all hover:border-gold/30"
-              >
-                <div className="grid sm:grid-cols-5">
-                  <div className="sm:col-span-2">
-                    <StylistPhoto
-                      src={stylist.imageUrl}
-                      alt={stylist.name}
-                      className="aspect-square min-h-[200px] sm:min-h-[280px]"
-                    />
+              <article key={stylist.id} className="el-stylist-card">
+                <div className="el-stylist-card-photo">
+                  <StylistPhoto src={stylist.imageUrl} alt={stylist.name} className="h-full w-full" />
+                </div>
+                <div className="el-stylist-card-body">
+                  <p className="el-stylist-card-title">{stylist.title}</p>
+                  <h2 className="el-stylist-card-name">{stylist.name}</h2>
+                  <p className="el-stylist-card-bio">{stylist.bio}</p>
+                  <div className="el-stylist-card-tags">
+                    {stylist.specialties.map((spec) => (
+                      <span key={spec} className="el-stylist-card-tag">
+                        {spec}
+                      </span>
+                    ))}
                   </div>
-                  <div className="flex flex-col justify-center p-8 sm:col-span-3">
-                    <p className="text-xs uppercase tracking-widest text-gold">{stylist.title}</p>
-                    <h2 className="font-serif mt-2 text-2xl">{stylist.name}</h2>
-                    <p className="mt-4 text-sm leading-relaxed text-muted">{stylist.bio}</p>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {stylist.specialties.map((spec) => (
-                        <span
-                          key={spec}
-                          className="border border-border px-3 py-1 text-xs text-muted"
-                        >
-                          {spec}
-                        </span>
-                      ))}
-                    </div>
-                    <Link
-                      href={`/booking?stylist=${stylist.id}`}
-                      className="mt-6 text-xs uppercase tracking-widest text-gold hover:text-gold-light"
-                    >
-                      Book with {stylist.name.split(" ")[0]} →
-                    </Link>
-                  </div>
+                  <Link href={`/booking?stylist=${stylist.id}`} className="el-stylist-card-link">
+                    Book with {stylist.name.split(" ")[0]} →
+                  </Link>
                 </div>
               </article>
             ))}

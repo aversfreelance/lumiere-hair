@@ -1,47 +1,47 @@
 import type { Metadata } from "next";
+import { asc, eq } from "drizzle-orm";
 import { withDb } from "@/lib/db";
 import { galleryImages } from "@/lib/db/schema";
-import { eq, asc } from "drizzle-orm";
 import { ThemePageSwitch } from "@/components/theme/ThemePageSwitch";
 import { YoungGalleryPage } from "@/components/young/YoungGalleryPage";
 import { StyleGalleryPage } from "@/components/style/StyleGalleryPage";
 import { GalleryPhoto } from "@/components/ui/MediaPlaceholders";
+import { FALLBACK_GALLERY, sortGalleryImages, type GalleryImage } from "@/lib/gallery-data";
 
 export const metadata: Metadata = {
   title: "Gallery",
   description: "Browse our portfolio of stunning hair transformations.",
 };
 
-const fallbackGallery = [
-  { id: 1, title: "Sunset Balayage", imageUrl: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=600&q=80", category: "Color" },
-  { id: 2, title: "Precision Bob", imageUrl: "https://images.unsplash.com/photo-1595476108010-b334798e5352?w=600&q=80", category: "Cut" },
-  { id: 3, title: "Bridal Elegance", imageUrl: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=600&q=80", category: "Styling" },
-  { id: 4, title: "Platinum Blonde", imageUrl: "https://images.unsplash.com/photo-1492106087820-71f1a00d544d?w=600&q=80", category: "Color" },
-  { id: 5, title: "Textured Layers", imageUrl: "https://images.unsplash.com/photo-1634449577050-15f83c093568?w=600&q=80", category: "Cut" },
-  { id: 6, title: "Evening Glam", imageUrl: "https://images.unsplash.com/photo-1515377905703-c4788e51fb15?w=600&q=80", category: "Styling" },
-  { id: 7, title: "Copper Tones", imageUrl: "https://images.unsplash.com/photo-1605497788041-5f32be35f269?w=600&q=80", category: "Color" },
-  { id: 8, title: "Sleek Straight", imageUrl: "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80", category: "Treatment" },
-];
-
-export default async function GalleryPage() {
-  return (
-    <ThemePageSwitch elegant={<ElegantGalleryPage />} young={<YoungGalleryPage />} style={<StyleGalleryPage />} />
-  );
-}
-
-async function ElegantGalleryPage() {
-  const images = await withDb(
-    async (db) =>
+async function loadGalleryImages(): Promise<GalleryImage[]> {
+  const rows = await withDb(
+    (db) =>
       db
         .select()
         .from(galleryImages)
         .where(eq(galleryImages.isActive, true))
         .orderBy(asc(galleryImages.sortOrder)),
-    fallbackGallery
+    FALLBACK_GALLERY
   );
 
-  const displayImages = images.length > 0 ? images : fallbackGallery;
-  const categories = ["All", ...new Set(displayImages.map((i) => i.category))];
+  const active = rows.filter((row) => row.isActive !== false);
+  return sortGalleryImages(active.length ? active : FALLBACK_GALLERY);
+}
+
+export default async function GalleryPage() {
+  const images = await loadGalleryImages();
+
+  return (
+    <ThemePageSwitch
+      elegant={<ElegantGalleryPage images={images} />}
+      young={<YoungGalleryPage images={images} />}
+      style={<StyleGalleryPage images={images} />}
+    />
+  );
+}
+
+function ElegantGalleryPage({ images }: { images: GalleryImage[] }) {
+  const categories = ["All", ...new Set(images.map((i) => i.category))];
 
   return (
     <div>
@@ -70,7 +70,7 @@ async function ElegantGalleryPage() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {displayImages.map((image, i) => (
+            {images.map((image, i) => (
               <figure
                 key={image.id}
                 className={`group relative overflow-hidden ${i === 0 || i === 5 ? "lg:col-span-2 lg:row-span-2" : ""}`}

@@ -39,6 +39,14 @@ yarn-error.log*
 # vercel
 .vercel
 
+# uploaded stylist photos (keep folder)
+/public/uploads/stylists/*
+!/public/uploads/stylists/.gitkeep
+/public/uploads/gallery/*
+!/public/uploads/gallery/.gitkeep
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel
