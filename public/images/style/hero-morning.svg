@@ -1,0 +1,6 @@
+<svg width="1024" height="366" viewBox="0 0 1024 366" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <text x="40" y="180" font-family="Arial Black, sans-serif" font-size="180" font-weight="900" fill="#FFFFFF" letter-spacing="-8">good</text>
+  <text x="40" y="320" font-family="Arial Black, sans-serif" font-size="180" font-weight="900" fill="#A8FFF8" letter-spacing="-8">morning</text>
+  <path d="M30 340C200 300 400 380 600 330C800 280 900 350 1020 310" stroke="#E8C4FF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M50 355C250 320 450 390 650 350C850 310 950 370 1010 340" stroke="#B8FFBC" stroke-width="5" stroke-linecap="round"/>
+</svg>

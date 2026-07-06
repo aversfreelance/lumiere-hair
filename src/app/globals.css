@@ -1,26 +1,168 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* sunshine-young.css imported from layout.tsx */
+
+/* ── Elegant theme (default) ── */
+:root,
+[data-theme="elegant"] {
+  --background: #0c0a09;
+  --foreground: #fafaf9;
+  --gold: #c9a962;
+  --gold-light: #e8d5a3;
+  --gold-dark: #9a7b3c;
+  --surface: #1c1917;
+  --surface-elevated: #292524;
+  --muted: #a8a29e;
+  --border: #44403c;
+  --accent-text: #0c0a09;
+  --header-bg: rgba(12, 10, 9, 0.8);
+  --hero-overlay: rgba(12, 10, 9, 0.72);
+  --hero-overlay-end: rgba(12, 10, 9, 0.35);
+  --radius-btn: 0px;
+  --radius-card: 0px;
+  --shadow-card: none;
+  --font-display: var(--font-playfair);
+  --logo-tracking: 0.2em;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent-text: var(--accent-text);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-display);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html[data-theme="young"] body {
+  background: linear-gradient(90.77deg, #000000 -22.7%, #46424f 135.15%);
+  color: #ffffff;
+}
+
+html[data-theme="style"] body {
+  background: #ffee58;
+  color: #111111;
+}
+
+.font-serif {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--gold) 40%, transparent);
+}
+
+.gradient-gold {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+  color: var(--accent-text);
+  border-radius: var(--radius-btn);
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.theme-card {
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.theme-btn-outline {
+  border-radius: var(--radius-btn);
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer-border {
+  background: linear-gradient(90deg, var(--border), var(--gold), var(--border));
+  background-size: 200% auto;
+  animation: shimmer 4s linear infinite;
+}
+
+.site-header {
+  background: var(--header-bg);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+.hero-section .hero-overlay {
+  background: linear-gradient(
+    to right,
+    var(--hero-overlay) 40%,
+    var(--hero-overlay-end)
+  );
+}
+
+.hero-section .hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
+.hero-section .hero-bg-parallax {
+  overflow: hidden;
+}
+
+.hero-section .hero-bg-parallax-layer {
+  position: absolute;
+  inset: -20% 0;
+  will-change: transform;
+}
+
+.hero-section .hero-bg-parallax-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.theme-switcher-btn-active {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  color: var(--accent-text);
+}
+
+.image-placeholder {
+  min-height: 120px;
+}
+
+.image-placeholder-icon {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25));
 }

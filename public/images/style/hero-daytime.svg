@@ -1,0 +1,6 @@
+<svg width="1024" height="366" viewBox="0 0 1024 366" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <text x="40" y="180" font-family="Arial Black, sans-serif" font-size="160" font-weight="900" fill="#FFFFFF" letter-spacing="-6">salon</text>
+  <text x="40" y="320" font-family="Arial Black, sans-serif" font-size="160" font-weight="900" fill="#E8C4FF" letter-spacing="-6">time</text>
+  <path d="M20 200C180 140 380 260 560 180C740 100 860 240 1004 160" stroke="#A8FFF8" stroke-width="10" stroke-linecap="round"/>
+  <path d="M40 250C220 190 420 310 620 230C820 150 920 290 1000 210" stroke="#B8FFBC" stroke-width="6" stroke-linecap="round"/>
+</svg>

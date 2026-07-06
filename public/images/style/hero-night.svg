@@ -1,0 +1,6 @@
+<svg width="1024" height="366" viewBox="0 0 1024 366" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <text x="40" y="180" font-family="Arial Black, sans-serif" font-size="170" font-weight="900" fill="#FFFFFF" letter-spacing="-6">night</text>
+  <text x="40" y="320" font-family="Arial Black, sans-serif" font-size="170" font-weight="900" fill="#99CCFF" letter-spacing="-6">glow</text>
+  <path d="M20 190C200 120 400 250 580 160C760 70 880 220 1004 130" stroke="#E8C4FF" stroke-width="10" stroke-linecap="round"/>
+  <path d="M40 340C240 290 440 370 640 310C840 250 940 350 1010 300" stroke="#A8FFF8" stroke-width="6" stroke-linecap="round"/>
+</svg>

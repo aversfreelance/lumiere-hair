@@ -1,0 +1,94 @@
+"use client";
+
+import { useId } from "react";
+
+export function StyleManHeadIllustration({ className }: { className?: string }) {
+  const uid = useId().replace(/:/g, "");
+  const hair1 = `${uid}-hair1`;
+  const hair2 = `${uid}-hair2`;
+  const skin = `${uid}-skin`;
+  const bgGlow = `${uid}-bgGlow`;
+
+  return (
+    <svg
+      className={className}
+      width="520"
+      height="720"
+      viewBox="0 0 520 720"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-label="Stylish men's hair illustration"
+    >
+      <defs>
+        <linearGradient id={hair1} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#FF3CAC" />
+          <stop offset="35%" stopColor="#784BA0" />
+          <stop offset="70%" stopColor="#2B86C5" />
+          <stop offset="100%" stopColor="#17F51E" />
+        </linearGradient>
+        <linearGradient id={hair2} x1="100%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#FBAA31" />
+          <stop offset="50%" stopColor="#FF006E" />
+          <stop offset="100%" stopColor="#5AEBDA" />
+        </linearGradient>
+        <linearGradient id={skin} x1="30%" y1="0%" x2="70%" y2="100%">
+          <stop offset="0%" stopColor="#FFD4A8" />
+          <stop offset="100%" stopColor="#E8956D" />
+        </linearGradient>
+        <linearGradient id={bgGlow} x1="50%" y1="0%" x2="50%" y2="100%">
+          <stop offset="0%" stopColor="#8E33EA" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="#FFEE58" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+
+      <ellipse cx="260" cy="680" rx="180" ry="28" fill="#0E0E0E" fillOpacity="0.12" />
+      <circle cx="260" cy="300" r="240" fill={`url(#${bgGlow})`} />
+
+      <path
+        d="M120 280C80 180 100 80 180 45C240 20 300 15 340 40C400 70 430 140 420 220C415 280 390 340 360 390L340 420C300 360 220 340 160 360C110 375 90 330 120 280Z"
+        fill={`url(#${hair1})`}
+      />
+      <path
+        d="M400 250C450 160 420 70 350 35C310 15 270 10 250 25C220 45 210 90 220 150C230 210 260 280 300 330L320 360C360 300 390 280 400 250Z"
+        fill={`url(#${hair2})`}
+      />
+
+      <path d="M180 55C210 25 260 10 310 30C350 45 380 80 395 120C405 150 400 180 385 200C370 165 340 130 300 110C250 85 200 90 180 55Z" fill="#FF006E" />
+      <path d="M155 90C170 60 200 40 235 35C265 32 290 45 305 70C315 88 310 110 295 125C280 100 250 80 220 78C190 76 165 85 155 90Z" fill="#5AEBDA" />
+      <path d="M320 48C350 35 385 50 405 85C418 110 415 145 395 170C385 140 360 115 330 105C305 98 285 105 320 48Z" fill="#FBAA31" />
+      <path d="M130 160C105 120 115 75 150 55C175 42 195 55 205 85C212 105 200 130 180 145C160 125 140 145 130 160Z" fill="#17F51E" />
+      <path d="M410 180C435 140 425 95 390 75C365 62 345 75 335 105C328 125 340 150 360 165C380 145 400 165 410 180Z" fill="#8E33EA" />
+
+      <path d="M220 430C220 430 230 520 240 580H280C290 520 300 430 300 430C285 445 255 450 240 448C225 446 220 430 220 430Z" fill={`url(#${skin})`} />
+      <ellipse cx="260" cy="290" rx="95" ry="115" fill={`url(#${skin})`} />
+      <ellipse cx="168" cy="295" rx="14" ry="22" fill="#E8956D" />
+      <ellipse cx="352" cy="295" rx="14" ry="22" fill="#E8956D" />
+
+      <path d="M175 195C195 155 230 135 260 138C290 141 325 162 345 200C330 175 300 158 260 155C220 152 190 170 175 195Z" fill="#784BA0" />
+      <path d="M185 175C205 150 235 138 260 140C285 142 315 155 335 178C318 162 292 150 260 148C228 146 200 158 185 175Z" fill="#FF3CAC" />
+
+      <ellipse cx="225" cy="285" rx="16" ry="10" fill="#0E0E0E" />
+      <ellipse cx="295" cy="285" rx="16" ry="10" fill="#0E0E0E" />
+      <circle cx="230" cy="283" r="4" fill="#FFFFFF" />
+      <circle cx="300" cy="283" r="4" fill="#FFFFFF" />
+
+      <path d="M205 262C220 252 240 250 250 255" stroke="#3D2314" strokeWidth="4" strokeLinecap="round" />
+      <path d="M270 255C280 250 300 252 315 262" stroke="#3D2314" strokeWidth="4" strokeLinecap="round" />
+      <path d="M260 295C260 295 252 320 260 335C268 320 260 295 260 295Z" fill="#D4845C" />
+      <path d="M235 355C250 368 270 368 285 355" stroke="#C45B5B" strokeWidth="4" strokeLinecap="round" fill="none" />
+      <path d="M195 340C210 385 240 405 260 408C280 405 310 385 325 340" stroke="#C9866A" strokeWidth="2" fill="none" opacity="0.5" />
+
+      <circle cx="90" cy="200" r="28" fill="#17F51E" fillOpacity="0.7" />
+      <circle cx="430" cy="160" r="22" fill="#0085FF" fillOpacity="0.75" />
+      <rect x="60" y="380" width="44" height="44" rx="8" fill="#FF006E" transform="rotate(15 82 402)" />
+      <polygon points="450,360 480,390 420,395" fill="#FBAA31" />
+      <circle cx="110" cy="480" r="18" fill="#8E33EA" />
+      <circle cx="400" cy="450" r="14" fill="#5AEBDA" />
+
+      <path d="M200 120C230 90 280 75 320 95" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" opacity="0.45" />
+      <path d="M250 70C290 55 340 70 370 110" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" opacity="0.35" />
+      <path d="M170 220C190 190 230 175 270 180" stroke="#FFEE58" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+    </svg>
+  );
+}

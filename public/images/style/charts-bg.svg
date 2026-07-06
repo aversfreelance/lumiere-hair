@@ -1,0 +1,5 @@
+<svg width="1024" height="800" viewBox="0 0 1024 800" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <path d="M0 400C200 200 400 600 600 350C800 100 900 500 1024 300V800H0V400Z" fill="#5AEBDA" fill-opacity="0.08"/>
+  <path d="M0 500C300 350 500 650 700 450C900 250 950 550 1024 400V800H0V500Z" fill="#8E33EA" fill-opacity="0.06"/>
+  <path d="M0 600C250 500 550 750 800 550C950 450 1000 650 1024 550V800H0V600Z" fill="#17F51E" fill-opacity="0.05"/>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1917"/>
+      <stop offset="55%" stop-color="#44403c"/>
+      <stop offset="100%" stop-color="#c9a962"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <circle cx="200" cy="118" r="36" stroke="#e8d5a3" stroke-width="2" fill="none" opacity="0.6"/>
+  <path d="M176 118 L200 94 L224 118 L200 142 Z" fill="#c9a962" opacity="0.85"/>
+  <text x="200" y="195" text-anchor="middle" fill="#fafaf9" font-family="Georgia, serif" font-size="18" letter-spacing="4">LUMIÈRE</text>
+  <text x="200" y="218" text-anchor="middle" fill="#e8d5a3" font-family="Arial, sans-serif" font-size="10" letter-spacing="3">HAIR ATELIER</text>
+</svg>
