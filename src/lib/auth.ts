@@ -6,8 +6,8 @@ import { adminUsers } from "./db/schema";
 import { eq } from "drizzle-orm";
 
 const DEV_ADMIN = {
-  email: "admin@lumiere-hair.com",
-  password: "admin123",
+  email: "avers.freelance@gmail.com",
+  password: "Pinterg123!",
   id: 0,
   name: "Salon Admin",
 } as const;

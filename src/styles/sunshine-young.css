@@ -1788,3 +1788,173 @@
   color: #000;
   border-radius: 12px;
 }
+
+.sunshine-site.admin-site .admin-schedule-section {
+  margin-top: 32px;
+  padding: clamp(20px, 3vw, 28px);
+  background: rgba(35, 33, 40, 0.92);
+  border: 1px solid rgba(251, 170, 49, 0.15);
+  border-radius: 20px;
+}
+
+.sunshine-site.admin-site .admin-schedule-day-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 20px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sunshine-site.admin-site .admin-schedule-day-title {
+  flex: 1;
+  text-align: center;
+}
+
+.sunshine-site.admin-site .admin-schedule-day-name {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  color: var(--ss-white);
+  margin: 0;
+}
+
+.sunshine-site.admin-site .admin-schedule-day-date {
+  margin: 4px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ss-orange);
+}
+
+.sunshine-site.admin-site .admin-schedule-nav {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 12px;
+  background: var(--ss-orange);
+  color: #000;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.sunshine-site.admin-site .admin-schedule-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.sunshine-site.admin-site .admin-schedule-closed {
+  padding: 20px;
+  text-align: center;
+  color: var(--ss-text-muted);
+  border: 2px dashed rgba(251, 170, 49, 0.35);
+  border-radius: 12px;
+}
+
+.sunshine-site.admin-site .admin-schedule-scroll {
+  overflow-x: auto;
+}
+
+.sunshine-site.admin-site .admin-schedule-grid {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+}
+
+.sunshine-site.admin-site .admin-schedule-grid thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 12px 10px;
+  background: rgba(0, 0, 0, 0.45);
+  color: var(--ss-orange);
+  text-align: center;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid rgba(251, 170, 49, 0.2);
+}
+
+.sunshine-site.admin-site .admin-schedule-time-col {
+  width: 72px;
+  min-width: 72px;
+  padding: 10px 12px;
+  text-align: right;
+  color: var(--ss-text-muted);
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.25);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  vertical-align: top;
+}
+
+.sunshine-site.admin-site .admin-schedule-stylist-col {
+  min-width: 160px;
+}
+
+.sunshine-site.admin-site .admin-schedule-cell {
+  min-width: 160px;
+  min-height: 72px;
+  padding: 6px;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.sunshine-site.admin-site .admin-schedule-booking {
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  border-radius: 10px;
+  border: 1px solid rgba(251, 170, 49, 0.35);
+  background: rgba(251, 170, 49, 0.12);
+}
+
+.sunshine-site.admin-site .admin-schedule-booking-pending {
+  border-color: rgba(251, 170, 49, 0.45);
+  background: rgba(251, 170, 49, 0.14);
+}
+
+.sunshine-site.admin-site .admin-schedule-booking-confirmed {
+  border-color: rgba(96, 196, 120, 0.55);
+  background: rgba(96, 196, 120, 0.14);
+}
+
+.sunshine-site.admin-site .admin-schedule-booking-completed {
+  border-color: rgba(130, 170, 255, 0.45);
+  background: rgba(130, 170, 255, 0.12);
+}
+
+.sunshine-site.admin-site .admin-schedule-booking-cancelled {
+  border-color: rgba(255, 120, 120, 0.4);
+  background: rgba(255, 120, 120, 0.1);
+  opacity: 0.75;
+}
+
+.sunshine-site.admin-site .admin-schedule-booking-time {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ss-orange);
+}
+
+.sunshine-site.admin-site .admin-schedule-booking-client {
+  margin: 4px 0 0;
+  font-weight: 700;
+  color: var(--ss-white);
+}
+
+.sunshine-site.admin-site .admin-schedule-booking-service {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: var(--ss-text-muted);
+}
+
+.sunshine-site.admin-site .admin-schedule-booking-status {
+  margin: 4px 0 0;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ss-text-muted);
+}

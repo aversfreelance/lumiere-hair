@@ -1,5 +1,5 @@
-import { AdminBookingsTable } from "@/components/admin/AdminBookingsTable";
+import { AdminBookingsView } from "@/components/admin/AdminBookingsView";
 
 export default function AdminBookingsPage() {
-  return <AdminBookingsTable />;
+  return <AdminBookingsView />;
 }

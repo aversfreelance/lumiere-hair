@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { format } from "date-fns";
@@ -28,26 +28,42 @@ const statuses = ["pending", "confirmed", "completed", "cancelled"];
 
 type AdminBookingsTableProps = {
   showServicesLink?: boolean;
+  showHeader?: boolean;
   compact?: boolean;
+  bookings?: AdminBooking[];
+  filterDate?: string;
+  onBookingsChange?: (bookings: AdminBooking[]) => void;
 };
 
 export function AdminBookingsTable({
   showServicesLink = true,
+  showHeader = true,
   compact = false,
+  bookings: bookingsProp,
+  filterDate,
+  onBookingsChange,
 }: AdminBookingsTableProps) {
   const router = useRouter();
-  const [bookings, setBookings] = useState<AdminBooking[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [bookingsState, setBookingsState] = useState<AdminBooking[]>([]);
+  const [loading, setLoading] = useState(!bookingsProp);
+
+  const bookings = bookingsProp ?? bookingsState;
+  const setBookings = onBookingsChange ?? setBookingsState;
 
   useEffect(() => {
+    if (bookingsProp) return;
+
     fetch("/api/admin/bookings")
       .then((r) => {
         if (r.status === 401) router.push("/admin");
         return r.json();
       })
-      .then(setBookings)
+      .then((rows) => {
+        if (onBookingsChange) onBookingsChange(rows);
+        else setBookingsState(rows);
+      })
       .finally(() => setLoading(false));
-  }, [router]);
+  }, [bookingsProp, onBookingsChange, router]);
 
   async function updateStatus(id: number, status: string) {
     await fetch("/api/admin/bookings", {
@@ -55,43 +71,58 @@ export function AdminBookingsTable({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, status }),
     });
-    setBookings((prev) => prev.map((b) => (b.id === id ? { ...b, status } : b)));
+    setBookings(bookings.map((b) => (b.id === id ? { ...b, status } : b)));
   }
 
   async function deleteBooking(id: number) {
     if (!confirm("Delete this booking?")) return;
     await fetch(`/api/admin/bookings?id=${id}`, { method: "DELETE" });
-    setBookings((prev) => prev.filter((b) => b.id !== id));
+    setBookings(bookings.filter((b) => b.id !== id));
   }
 
-  const visibleBookings = compact ? bookings.slice(0, 8) : bookings;
+  const filteredBookings = useMemo(() => {
+    const rows = filterDate
+      ? bookings.filter((b) => b.bookingDate === filterDate)
+      : bookings;
+    return compact ? rows.slice(0, 8) : rows;
+  }, [bookings, compact, filterDate]);
 
   if (loading) return <p className="text-muted">Loading bookings...</p>;
 
   return (
-    <div>
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <h2 className={compact ? "font-serif text-xl" : "font-serif text-3xl"}>
-            {compact ? "Recent Bookings" : "Bookings"}
-          </h2>
-          <p className="mt-2 text-sm text-muted">
-            {compact
-              ? "Latest appointments across all themes"
-              : "Manage all client appointments across all themes"}
-          </p>
+    <div className={showHeader || filterDate ? "mt-12" : undefined}>
+      {showHeader && (
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h2 className={compact ? "font-serif text-xl" : "font-serif text-3xl"}>
+              {compact ? "Recent Bookings" : "Bookings"}
+            </h2>
+            <p className="mt-2 text-sm text-muted">
+              {compact
+                ? "Latest appointments across all themes"
+                : "Manage all client appointments across all themes"}
+            </p>
+          </div>
+          {showServicesLink && (
+            <Link href="/admin/services">
+              <Button variant="secondary">Services & Pricing</Button>
+            </Link>
+          )}
         </div>
-        {showServicesLink && (
-          <Link href="/admin/services">
-            <Button variant="secondary">Services & Pricing</Button>
-          </Link>
-        )}
-      </div>
+      )}
 
-      {bookings.length === 0 ? (
-        <p className="mt-8 text-muted">No bookings found.</p>
+      {!showHeader && filterDate && (
+        <h3 className="font-serif text-xl">
+          Appointments for {format(new Date(`${filterDate}T12:00:00`), "EEEE, MMMM d")}
+        </h3>
+      )}
+
+      {filteredBookings.length === 0 ? (
+        <p className="mt-8 text-muted">
+          {filterDate ? "No bookings on this day." : "No bookings found."}
+        </p>
       ) : (
-        <div className="mt-8 overflow-x-auto">
+        <div className="mt-6 overflow-x-auto">
           <table className="w-full min-w-[880px] border border-border text-sm">
             <thead className="bg-surface-elevated text-left text-xs uppercase tracking-widest text-muted">
               <tr>
@@ -105,7 +136,7 @@ export function AdminBookingsTable({
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
-              {visibleBookings.map((b) => (
+              {filteredBookings.map((b) => (
                 <tr key={b.id} className="bg-surface-elevated/30">
                   <td className="p-4">
                     <div className="font-medium">{b.clientName}</div>
@@ -119,7 +150,7 @@ export function AdminBookingsTable({
                     )}
                   </td>
                   <td className="p-4 text-muted">{b.stylistName ?? `#${b.stylistId}`}</td>
-                  <td className="p-4">{format(new Date(b.bookingDate), "MMM d, yyyy")}</td>
+                  <td className="p-4">{format(new Date(`${b.bookingDate}T12:00:00`), "MMM d, yyyy")}</td>
                   <td className="p-4">
                     {b.startTime.slice(0, 5)} – {b.endTime.slice(0, 5)}
                   </td>
@@ -148,7 +179,7 @@ export function AdminBookingsTable({
         </div>
       )}
 
-      {compact && bookings.length > 8 && (
+      {compact && !filterDate && bookings.length > 8 && (
         <div className="mt-6">
           <Link href="/admin/bookings" className="text-xs uppercase tracking-widest text-gold hover:text-gold-light">
             View all bookings →

@@ -23,8 +23,8 @@ async function seed() {
   const [admin] = await db
     .insert(schema.adminUsers)
     .values({
-      email: "admin@lumiere-hair.com",
-      passwordHash: await hashPassword("admin123"),
+      email: "avers.freelance@gmail.com",
+      passwordHash: await hashPassword("Pinterg123!"),
       name: "Salon Admin",
     })
     .returning();
@@ -87,7 +87,7 @@ async function seed() {
   ]);
 
   console.log("Seed complete!");
-  console.log(`Admin login: ${admin.email} / admin123`);
+  console.log(`Admin login: ${admin.email}`);
 }
 
 seed().catch((err) => {
